@@ -5,6 +5,13 @@ using UnityEngine;
 
 public class CollectResources : MonoBehaviour
 {
+    private Base playerBase;
+
+    public void Start()
+    {
+        playerBase = FindObjectOfType<Base>();
+    }
+
     public void OnTriggerEnter2D(Collider2D other)
     {
         var resource = other.GetComponent<Resource>();
@@ -13,6 +20,7 @@ public class CollectResources : MonoBehaviour
 
     private void FoundResource(Resource resource)
     {
-        resource.transform.position = new Vector3(10, 10, 0);
+        resource.Collect(playerBase);
+        // TODO: Add resource in manager
     }
 }

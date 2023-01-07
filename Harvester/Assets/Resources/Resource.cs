@@ -15,18 +15,26 @@ public class ResourceSpritePair
 }
 
 [ExecuteInEditMode]
+[RequireComponent(typeof(Rigidbody2D))]
 public class Resource : MonoBehaviour
 {
+    private Rigidbody2D body;
+
     [field: SerializeField]
     public ResourceType Type { get; private set; }
 
     [SerializeField]
     private ResourceSpritePair[] sprites;
 
+    [SerializeField]
+    private float collectSpeed = 10f;
+
+    private Base targetBase = null;
+    public bool Collected => targetBase != null;
+
     private ResourceType currentType = ResourceType.None;
 
-    //private Dictionary<ResourceType, SpriteRenderer> spriteMap;
-    //public void Awake() => spriteMap = sprites.ToDictionary(pair => pair.Type, pair => pair.Sprite);
+    public void Start() => body = GetComponent<Rigidbody2D>();
 
     public void Update()
     {
@@ -34,11 +42,36 @@ public class Resource : MonoBehaviour
         if (currentType != Type && Type != ResourceType.None) { UpdateResourceType(Type); }
     }
 
+    public void FixedUpdate()
+    {
+        if (targetBase != null)
+        {
+            var distance = targetBase.transform.position - transform.position;
+            var stepDistance = collectSpeed * Time.deltaTime;
+            if (distance.sqrMagnitude >= stepDistance * stepDistance)
+            {
+                body.velocity = distance.normalized * collectSpeed;
+            }
+            else
+            {
+                Destroy(gameObject);
+            }
+        }
+    }
+
     public void UpdateResourceType(ResourceType type)
     {
+        Debug.Assert(!Collected, "Resource type was changed after it has been collected");
         Type = type;
         currentType = type;
         foreach (var sprite in sprites) { sprite.Sprite.gameObject.SetActive(false); }
         sprites.First(pair => pair.Type == currentType).Sprite.gameObject.SetActive(true);
+    }
+
+    public bool Collect(Base targetBase)
+    {
+        if (Collected) { return false; }
+        this.targetBase = targetBase;
+        return true;
     }
 }
