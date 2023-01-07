@@ -110,9 +110,9 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 0.75, y: 0}
-      - {x: -0.3, y: 0.4}
-      - {x: -0.3, y: -0.4}
+    - - {x: 0.65, y: 0}
+      - {x: -0.25, y: 0.32}
+      - {x: -0.25, y: -0.32}
 --- !u!1 &5356421097157640071
 GameObject:
   m_ObjectHideFlags: 0
@@ -207,6 +207,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5356421097573935899}
   - component: {fileID: 5356421097573935896}
+  - component: {fileID: 8050770775817352990}
   - component: {fileID: 5356421097573935903}
   - component: {fileID: 5356421097573935897}
   m_Layer: 0
@@ -248,6 +249,18 @@ MonoBehaviour:
   speed: 8
   turnSpeed: 1000
   turnObject: {fileID: 5356421096411651594}
+--- !u!114 &8050770775817352990
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5356421097573935908}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 495de2b8d77f04a4e834d29202e01b72, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!50 &5356421097573935903
 Rigidbody2D:
   serializedVersion: 4
