@@ -30,6 +30,11 @@ public class ResourceFieldManager : MonoBehaviour
         Debug.Assert(prefab != null);
 
         var newField = Instantiate(prefab, Random.insideUnitCircle * spawnRange, Quaternion.identity, transform);
+        newField.OnCollected += () =>
+        {
+            SpawnField(type);
+            Destroy(newField.gameObject);
+        };
         newField.UpdateResourceType(type);
         fields.Add(newField);
     }

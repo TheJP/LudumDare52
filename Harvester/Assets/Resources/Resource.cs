@@ -31,6 +31,7 @@ public class Resource : MonoBehaviour
 
     private Base targetBase = null;
     public bool Collected => targetBase != null;
+    public event Action OnCollected;
 
     private ResourceType currentType = ResourceType.None;
 
@@ -72,6 +73,7 @@ public class Resource : MonoBehaviour
     {
         if (Collected) { return false; }
         this.targetBase = targetBase;
+        OnCollected?.Invoke();
         return true;
     }
 }

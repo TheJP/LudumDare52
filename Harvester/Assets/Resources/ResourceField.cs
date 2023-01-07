@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 [ExecuteInEditMode]
@@ -9,6 +11,16 @@ public class ResourceField : MonoBehaviour
     public ResourceType Type { get; private set; }
 
     private ResourceType currentType = ResourceType.None;
+
+    public event Action OnCollected;
+
+    public void Start()
+    {
+        foreach(var resource in GetComponentsInChildren<Resource>())
+        {
+            resource.OnCollected += CheckEmpty;
+        }
+    }
 
     public void Update()
     {
@@ -23,6 +35,14 @@ public class ResourceField : MonoBehaviour
         foreach (var resource in GetComponentsInChildren<Resource>())
         {
             resource.UpdateResourceType(currentType);
+        }
+    }
+
+    private void CheckEmpty()
+    {
+        if (GetComponentsInChildren<Resource>().All(r => r.Collected))
+        {
+            OnCollected?.Invoke();
         }
     }
 }

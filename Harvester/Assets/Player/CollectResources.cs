@@ -6,10 +6,12 @@ using UnityEngine;
 public class CollectResources : MonoBehaviour
 {
     private Base playerBase;
+    private ResourceManager resourceManager;
 
     public void Start()
     {
         playerBase = FindObjectOfType<Base>();
+        resourceManager = FindObjectOfType<ResourceManager>();
     }
 
     public void OnTriggerEnter2D(Collider2D other)
@@ -20,7 +22,7 @@ public class CollectResources : MonoBehaviour
 
     private void FoundResource(Resource resource)
     {
+        if (!resourceManager.Add(resource.Type)) { return; }
         resource.Collect(playerBase);
-        // TODO: Add resource in manager
     }
 }

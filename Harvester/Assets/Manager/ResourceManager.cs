@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -27,6 +28,7 @@ public class ResourceManager : MonoBehaviour
     private ResourceManagerEntry[] resourceMaximum;
 
     private readonly Dictionary<ResourceType, Label> labels = new();
+
     private readonly Dictionary<ResourceType, ProgressBar> bars = new();
 
     private static readonly IReadOnlyCollection<(ResourceType type, string name)> names = Array.AsReadOnly(new[]
@@ -69,5 +71,19 @@ public class ResourceManager : MonoBehaviour
                 bars[resource.Type].value = resource.Value;
             }
         }
+    }
+
+    public bool Add(ResourceType type)
+    {
+        foreach (var resource in resources)
+        {
+            if (resource.Type == type && resource.Value < (resourceMaximum.FirstOrDefault(r => r.Type == type)?.Value ?? 0))
+            {
+                ++resource.Value;
+                return true;
+            }
+        }
+
+        return false;
     }
 }
