@@ -1,0 +1,82 @@
+.resource {
+    flex-direction: row;
+    width: 65px;
+    margin-right: 10px;
+    align-items: center;
+}
+
+.resource-icon {
+    width: 20px;
+    height: 20px;
+    -unity-background-scale-mode: stretch-to-fill;
+}
+
+.resource-label {
+    color: rgb(238, 238, 238);
+    margin-left: 5px;
+}
+
+.resource-box {
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    padding-left: 20px;
+    padding-right: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    background-color: rgb(17, 17, 17);
+}
+
+.resources-bar-box {
+}
+
+.resource-bar {
+    flex-direction: row;
+    align-items: center;
+    padding-right: 10px;
+    margin-top: 5px;
+}
+
+.resource-bar-icon {
+    width: 20px;
+    height: 20px;
+    -unity-background-scale-mode: stretch-to-fill;
+    margin-right: 5px;
+}
+
+.resource-bar-value {
+    flex-grow: 1;
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.resource-bar-value .unity-progress-bar__background {
+    background-color: rgb(0, 0, 0);
+}
+
+#fuel-bar .unity-progress-bar__background {
+    border-left-color: rgb(255, 190, 0);
+    border-right-color: rgb(255, 190, 0);
+    border-top-color: rgb(255, 190, 0);
+    border-bottom-color: rgb(255, 190, 0);
+}
+
+#fuel-bar .unity-progress-bar__progress {
+    background-color: rgb(255, 190, 0);
+}
+
+#health-bar .unity-progress-bar__background {
+    border-left-color: rgb(0, 208, 0);
+    border-right-color: rgb(0, 208, 0);
+    border-top-color: rgb(0, 208, 0);
+    border-bottom-color: rgb(0, 208, 0);
+}
+
+#health-bar .unity-progress-bar__progress {
+    background-color: rgb(0, 208, 0);
+}
+
+.unity-progress-bar__progress {
+    transition-duration: 1s;
+}

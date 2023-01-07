@@ -11,7 +11,7 @@ public class ResourceFieldManager : MonoBehaviour
     [SerializeField]
     private float spawnRange = 100f;
 
-    private List<ResourceField> fields = new();
+    private readonly List<ResourceField> fields = new();
 
     public void Update()
     {
