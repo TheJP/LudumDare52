@@ -28,8 +28,9 @@ public class ResourceManager : MonoBehaviour
     private ResourceManagerEntry[] resourceMaximum;
 
     private readonly Dictionary<ResourceType, Label> labels = new();
-
     private readonly Dictionary<ResourceType, ProgressBar> bars = new();
+    private readonly HashSet<ResourceType> maxedOut = new();
+    private readonly Dictionary<ResourceType, Color> defaultColours = new();
 
     private static readonly IReadOnlyCollection<(ResourceType type, string name)> names = Array.AsReadOnly(new[]
     {
@@ -39,14 +40,30 @@ public class ResourceManager : MonoBehaviour
         (ResourceType.Research, "research"),
     });
 
+    private int MaxValue(ResourceType type) => resourceMaximum.FirstOrDefault(r => r.Type == type)?.Value ?? 0;
+
     public void Start()
     {
         foreach (var resource in names)
         {
             var label = resourceDisplay.rootVisualElement.Q<Label>($"{resource.name}-label");
             var bar = resourceDisplay.rootVisualElement.Q<ProgressBar>($"{resource.name}-bar");
-            if (label != null) { labels.Add(resource.type, label); }
             if (bar != null) { bars.Add(resource.type, bar); }
+            if (label != null)
+            {
+                labels.Add(resource.type, label);
+                defaultColours.Add(resource.type, label.resolvedStyle.color);
+            }
+        }
+
+        foreach (var resource in resources)
+        {
+            var max = MaxValue(resource.Type);
+            if (resource.Value >= max)
+            {
+                resource.Value = max;
+                maxedOut.Add(resource.Type);
+            }
         }
     }
 
@@ -71,15 +88,31 @@ public class ResourceManager : MonoBehaviour
                 bars[resource.Type].value = resource.Value;
             }
         }
+
+        if (!Application.isPlaying) { return; }
+        Debug.Log("playing");
+
+        foreach (var resource in resources)
+        {
+            if (!labels.ContainsKey(resource.Type)) { continue; }
+            var label = labels[resource.Type];
+            var isRed = Mathf.RoundToInt(Time.time) % 2 == 0 && maxedOut.Contains(resource.Type);
+            label.style.color = new StyleColor(isRed ? Color.red : defaultColours[resource.Type]);
+        }
     }
 
-    public bool Add(ResourceType type)
+    public bool UpdateStockpile(ResourceType type, int amount = 1)
     {
         foreach (var resource in resources)
         {
-            if (resource.Type == type && resource.Value < (resourceMaximum.FirstOrDefault(r => r.Type == type)?.Value ?? 0))
+            if (resource.Type != type) { continue; }
+            var max = MaxValue(type);
+            var newValue = resource.Value + amount;
+            if (0 <= newValue && newValue <= max)
             {
-                ++resource.Value;
+                resource.Value = newValue;
+                if (resource.Value == max) { maxedOut.Add(resource.Type); }
+                else { maxedOut.Remove(resource.Type); }
                 return true;
             }
         }

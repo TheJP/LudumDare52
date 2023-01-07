@@ -22,7 +22,7 @@ public class CollectResources : MonoBehaviour
 
     private void FoundResource(Resource resource)
     {
-        if (!resourceManager.Add(resource.Type)) { return; }
+        if (!resourceManager.UpdateStockpile(resource.Type)) { return; }
         resource.Collect(playerBase);
     }
 }
