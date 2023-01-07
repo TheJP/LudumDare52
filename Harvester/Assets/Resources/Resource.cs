@@ -4,15 +4,6 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public enum ResourceType
-{
-    None,
-    BuildingMaterial,
-    Fuel,
-    Health,
-    Research,
-}
-
 [Serializable]
 public class ResourceSpritePair
 {
@@ -26,8 +17,8 @@ public class ResourceSpritePair
 [ExecuteInEditMode]
 public class Resource : MonoBehaviour
 {
-    [SerializeField]
-    private ResourceType type;
+    [field: SerializeField]
+    public ResourceType Type { get; private set; }
 
     [SerializeField]
     private ResourceSpritePair[] sprites;
@@ -39,11 +30,15 @@ public class Resource : MonoBehaviour
 
     public void Update()
     {
-        Debug.Assert(type != ResourceType.None, "Invalid resource blob: resource type is 'none'");
+        Debug.Assert(Type != ResourceType.None, "Invalid resource blob: resource type is 'none'");
+        if (currentType != Type && Type != ResourceType.None) { UpdateResourceType(Type); }
+    }
 
-        if (currentType == type) { return; }
+    public void UpdateResourceType(ResourceType type)
+    {
+        Type = type;
         currentType = type;
         foreach (var sprite in sprites) { sprite.Sprite.gameObject.SetActive(false); }
-        sprites.First(pair => pair.Type == type).Sprite.gameObject.SetActive(true);
+        sprites.First(pair => pair.Type == currentType).Sprite.gameObject.SetActive(true);
     }
 }
