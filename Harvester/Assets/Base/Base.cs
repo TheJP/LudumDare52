@@ -8,8 +8,13 @@ public class Base : MonoBehaviour
     private float speed = 1f;
 
     private Vector3 targetPosition;
+    private ResourceManager resourceManager;
 
-    public void Start() => targetPosition = transform.position;
+    public void Start()
+    {
+        targetPosition = transform.position;
+        resourceManager = FindObjectOfType<ResourceManager>();
+    }
 
     public void Update()
     {
@@ -32,4 +37,6 @@ public class Base : MonoBehaviour
             transform.position += distance.normalized * step;
         }
     }
+
+    public bool UpdateHealth(int amount) => resourceManager.UpdateStockpile(ResourceType.Health, amount);
 }

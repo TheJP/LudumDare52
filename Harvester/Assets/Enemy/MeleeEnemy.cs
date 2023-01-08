@@ -19,14 +19,30 @@ public class MeleeEnemy : MonoBehaviour
     [SerializeField]
     private float turnSpeedAttacking = 180f;
 
+    [SerializeField]
+    private int attackDamage = 1;
+
+    [SerializeField]
+    private float attackCooldown = 0.5f;
+
     private Base playerBase;
 
     private bool attacking = false;
+    private float lastAttackTime = 0;
 
     public void Start()
     {
         body = GetComponent<Rigidbody2D>();
         playerBase = FindObjectOfType<Base>();
+    }
+
+    public void Update()
+    {
+        if (!attacking) { return; }
+        if (Time.time - lastAttackTime < attackCooldown) { return; }
+
+        lastAttackTime += attackCooldown;
+        playerBase.UpdateHealth(-attackDamage);
     }
 
     public void FixedUpdate()
@@ -45,7 +61,11 @@ public class MeleeEnemy : MonoBehaviour
 
     public void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.GetComponentInParent<Base>() != null) { attacking = true; }
+        if (collision.gameObject.GetComponentInParent<Base>() != null)
+        {
+            attacking = true;
+            lastAttackTime = Time.time;
+        }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
