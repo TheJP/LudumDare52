@@ -5,9 +5,6 @@ using UnityEngine;
 
 public class SmallTurret : Turret
 {
-    private const string EnemyTag = "Enemy";
-    private const string ProjectileParentTag = "ProjectileParent";
-
     [SerializeField]
     private SmallTurretProjectile projectilePrefab;
 
@@ -27,7 +24,7 @@ public class SmallTurret : Turret
     private float aquireTargetCooldown = 1f;
 
     [field: SerializeField]
-    public float Damage { get; set; } = 20f;
+    public int Damage { get; set; } = 20;
 
     private Transform projectileParent;
     private float lastShot = 0f;
@@ -37,7 +34,7 @@ public class SmallTurret : Turret
 
     public void Start()
     {
-        projectileParent = GameObject.FindWithTag(ProjectileParentTag).transform;
+        projectileParent = GameObject.FindWithTag(Common.ProjectileParentTag).transform;
         currentAngle = transform.eulerAngles.z;
     }
 
@@ -80,7 +77,7 @@ public class SmallTurret : Turret
         var results = Physics2D.OverlapCircleAll(transform.position, turretRange);
         Transform closest = null;
         float closestDistance = float.PositiveInfinity;
-        foreach (var result in results.Where(r => r.CompareTag(EnemyTag)))
+        foreach (var result in results.Where(r => r.CompareTag(Common.EnemyTag)))
         {
             var distance = ((Vector2)result.transform.position - (Vector2)transform.position).sqrMagnitude;
             if (distance < closestDistance)

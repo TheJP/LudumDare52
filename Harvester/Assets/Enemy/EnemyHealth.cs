@@ -5,14 +5,14 @@ using UnityEngine;
 public class EnemyHealth : MonoBehaviour
 {
     [field: SerializeField]
-    public float Health { get; private set; } = 100f;
+    public int Health { get; private set; } = 100;
 
     [field: SerializeField]
-    public float MaxHealth { get; private set; } = 100f;
+    public int MaxHealth { get; private set; } = 100;
 
-    public void UpdateHealth(float amount)
+    public void UpdateHealth(int amount)
     {
         Health = Mathf.Clamp(Health + amount, 0, MaxHealth);
-        if (Health < 0.001) { Destroy(gameObject); }
+        if (Health == 0) { Destroy(gameObject); }
     }
 }

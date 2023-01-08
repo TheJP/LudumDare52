@@ -28,9 +28,10 @@ public class RangedEnemy : MonoBehaviour
     [SerializeField]
     private float attackCooldown = 2f;
 
-    //[SerializeField]
-    //private 
+    [SerializeField]
+    private EnemyProjectile projectilePrefab;
 
+    private Transform projectileParent;
     private Base playerBase;
     private float lastAttackTime;
     private bool flyAway = false;
@@ -41,13 +42,10 @@ public class RangedEnemy : MonoBehaviour
     public void Start()
     {
         body = GetComponent<Rigidbody2D>();
+        projectileParent = GameObject.FindWithTag(Common.ProjectileParentTag).transform;
         playerBase = FindObjectOfType<Base>();
         currentAngle = transform.eulerAngles.z;
-    }
-
-    public void Update()
-    {
-
+        lastAttackTime = Time.time;
     }
 
     private void FixedUpdate()
@@ -111,8 +109,8 @@ public class RangedEnemy : MonoBehaviour
 
             if (Time.time - lastAttackTime < attackCooldown) { return; }
             lastAttackTime += attackCooldown;
-            // TODO: Attack
-            Debug.Log("attack");
+            var projectile = Instantiate(projectilePrefab, transform.position, transform.rotation, projectileParent);
+            //projectile.SetTarget(playerBase, Damage);
         }
     }
 }
