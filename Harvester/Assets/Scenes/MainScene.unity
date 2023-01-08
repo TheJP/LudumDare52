@@ -212,7 +212,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1199140121}
   - component: {fileID: 1199140122}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: BuyScanCountdownInterface
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -249,7 +249,7 @@ MonoBehaviour:
   m_PanelSettings: {fileID: 11400000, guid: 48d2fa18e6649b6408eff9776f0a0f0a, type: 2}
   m_ParentUI: {fileID: 0}
   sourceAsset: {fileID: 9197481963319205126, guid: 6100195f19cf4e54f9ec92bb84c31378, type: 3}
-  m_SortingOrder: -1
+  m_SortingOrder: 1
 --- !u!1 &1205222245
 GameObject:
   m_ObjectHideFlags: 0
@@ -260,7 +260,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1205222247}
   - component: {fileID: 1205222246}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: BuyInterface
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -282,7 +282,7 @@ MonoBehaviour:
   m_PanelSettings: {fileID: 11400000, guid: 48d2fa18e6649b6408eff9776f0a0f0a, type: 2}
   m_ParentUI: {fileID: 0}
   sourceAsset: {fileID: 9197481963319205126, guid: 1b0d47e2ff0ddc3429de004db9882234, type: 3}
-  m_SortingOrder: -2
+  m_SortingOrder: 3
 --- !u!4 &1205222247
 Transform:
   m_ObjectHideFlags: 0

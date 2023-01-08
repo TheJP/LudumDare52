@@ -19,18 +19,16 @@ public class Movement : MonoBehaviour
     private Transform turnObject;
 
     private Vector2 move = Vector2.zero;
+    private Base playerBase;
 
     // Rotation animation
     private float rotation = 0f;
 
-    private void Awake()
-    {
-        body = GetComponent<Rigidbody2D>();
-    }
-
     void Start()
     {
+        body = GetComponent<Rigidbody2D>();
         rotation = turnObject.eulerAngles.z;
+        playerBase = FindObjectOfType<Base>();
     }
 
     public void FixedUpdate()
@@ -60,4 +58,9 @@ public class Movement : MonoBehaviour
         move = value.Get<Vector2>();
         body.velocity = move * speed;
     }
+
+
+    private Vector2 pointer = Vector2.zero;
+    public void OnPoint(InputValue value) => pointer = value.Get<Vector2>();
+    public void OnClick() => playerBase.OnClick(pointer);
 }
