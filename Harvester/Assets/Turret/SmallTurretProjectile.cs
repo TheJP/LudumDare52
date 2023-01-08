@@ -10,7 +10,9 @@ public class SmallTurretProjectile : MonoBehaviour
     [SerializeField]
     private float speed = 8f;
 
-    public Transform Target { get; set; }
+    public Transform Target { get; private set; }
+
+    public float Damage { get; private set; }
 
     public void Start() => body = GetComponent<Rigidbody2D>();
 
@@ -32,8 +34,15 @@ public class SmallTurretProjectile : MonoBehaviour
         if (Target == null) { return; }
         if (Target == other.transform)
         {
-            // TODO: Do damage to target
+            Target.GetComponent<EnemyHealth>().UpdateHealth(-Damage);
+            Damage = 0; // Prevent applying damage multiple times.
             Destroy(gameObject);
         }
+    }
+
+    public void SetTarget(Transform target, float damage)
+    {
+        Damage = damage;
+        Target = target;
     }
 }

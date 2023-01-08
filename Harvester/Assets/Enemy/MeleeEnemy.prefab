@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3418817732062990564}
   - component: {fileID: 1105531145745817357}
+  - component: {fileID: 1618223481886580442}
   - component: {fileID: 1105531145745817356}
   - component: {fileID: 1105531145745817355}
   - component: {fileID: 9042911027666462312}
@@ -50,6 +51,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   range: 15
   speed: 4
+  turnSpeed: 20
+  turnSpeedAttacking: 180
+--- !u!114 &1618223481886580442
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5307137108015835192}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78de5012ac1842946855899457ff1abd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <Health>k__BackingField: 100
+  <MaxHealth>k__BackingField: 100
 --- !u!50 &1105531145745817356
 Rigidbody2D:
   serializedVersion: 4

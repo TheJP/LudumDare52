@@ -26,6 +26,9 @@ public class SmallTurret : Turret
     [SerializeField]
     private float aquireTargetCooldown = 1f;
 
+    [field: SerializeField]
+    public float Damage { get; set; } = 20f;
+
     private Transform projectileParent;
     private float lastShot = 0f;
     private Transform currentTarget = null;
@@ -66,7 +69,7 @@ public class SmallTurret : Turret
             lastShot = Time.time;
             var spawnPosition = (projectileSpawnPosition != null ? projectileSpawnPosition : transform).position;
             var projectile = Instantiate(projectilePrefab, spawnPosition, Quaternion.Euler(0, 0, currentAngle), projectileParent);
-            projectile.Target = currentTarget;
+            projectile.SetTarget(currentTarget, Damage);
         }
 
         transform.rotation = Quaternion.Euler(0, 0, currentAngle);
