@@ -31,6 +31,9 @@ public class RangedEnemy : MonoBehaviour
     [SerializeField]
     private EnemyProjectile projectilePrefab;
 
+    [field: SerializeField]
+    public int Damage { get; private set; } = 1;
+
     private Transform projectileParent;
     private Base playerBase;
     private float lastAttackTime;
@@ -110,7 +113,7 @@ public class RangedEnemy : MonoBehaviour
             if (Time.time - lastAttackTime < attackCooldown) { return; }
             lastAttackTime += attackCooldown;
             var projectile = Instantiate(projectilePrefab, transform.position, transform.rotation, projectileParent);
-            //projectile.SetTarget(playerBase, Damage);
+            projectile.SetTarget(playerBase.transform, Damage);
         }
     }
 }

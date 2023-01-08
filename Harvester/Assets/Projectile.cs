@@ -5,7 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public abstract class Projectile : MonoBehaviour
 {
-    protected abstract void HitEnemy();
+    protected abstract void HitEnemy(int damage);
 
 
     private Rigidbody2D body;
@@ -14,7 +14,7 @@ public abstract class Projectile : MonoBehaviour
     private float speed = 8f;
 
     [SerializeField]
-    private bool spinning = false;
+    private float spinSpeed = 0f;
 
     public Transform Target { get; private set; }
 
@@ -32,24 +32,23 @@ public abstract class Projectile : MonoBehaviour
 
         Vector2 direction = Target.position - transform.position;
         body.velocity = direction.normalized * speed;
-        if (!spinning)
+        if (spinSpeed < 0.001f)
         {
             transform.rotation = Quaternion.Euler(0, 0, Mathf.Rad2Deg * Mathf.Atan2(direction.y, direction.x));
         }
         else
         {
-            //TODO:
+            transform.Rotate(0, 0, spinSpeed * Time.fixedDeltaTime);
         }
     }
 
     public void OnTriggerEnter2D(Collider2D other)
     {
         if (Target == null) { return; }
-        if (Target == other.transform)
+        if (other.transform.IsChildOf(Target)) // true if either ancestor or equal.
         {
-            if (Damage != 0) { HitEnemy(); }
+            if (Damage != 0) { HitEnemy(Damage); }
             Damage = 0; // Prevent applying damage multiple times.
-            Destroy(gameObject);
         }
     }
 

@@ -55,6 +55,8 @@ MonoBehaviour:
   flyingRange: 3
   rangeBand: 3
   attackCooldown: 2
+  projectilePrefab: {fileID: 7832326434226699937, guid: a5e1d47e35d8d884298ee27e9dbde0df, type: 3}
+  <Damage>k__BackingField: 1
 --- !u!114 &3851139691674151076
 MonoBehaviour:
   m_ObjectHideFlags: 0
