@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
-public class RangedEnemy : MonoBehaviour
+public class RangedEnemy : Enemy
 {
     private Rigidbody2D body;
 
@@ -51,6 +51,18 @@ public class RangedEnemy : MonoBehaviour
         lastAttackTime = Time.time;
     }
 
+    public void Update()
+    {
+        if (Time.time - lastAttackTime < attackCooldown) { return; }
+        lastAttackTime += attackCooldown;
+
+        var squaredDistance = (playerBase.transform.position - transform.position).sqrMagnitude;
+        if (squaredDistance > attackRange * attackRange) { return; }
+
+        var projectile = Instantiate(projectilePrefab, transform.position, transform.rotation, projectileParent);
+        projectile.SetTarget(playerBase.transform, Damage);
+    }
+
     private void FixedUpdate()
     {
         Vector2 distance = playerBase.transform.position - transform.position;
@@ -65,55 +77,62 @@ public class RangedEnemy : MonoBehaviour
             transform.rotation = Quaternion.Euler(0, 0, currentAngle);
         }
 
-        if (squaredDistance > targetRange * targetRange)
+        if (Protectee == null)
         {
-            body.velocity = Vector2.zero;
-        }
-        else if (squaredDistance > attackRange * attackRange)
-        {
-            body.velocity = distance.normalized * speed;
-            lastAttackTime = Time.time;
+            if (squaredDistance > targetRange * targetRange)
+            {
+                body.velocity = Vector2.zero;
+                return;
+            }
         }
         else
         {
-            // Oscillate between attackRange and flyingRange.
-            float middleRange = (attackRange + flyingRange) * 0.5f;
-            float attackBandRange = middleRange + rangeBand * 0.5f;
-            float flyingBandRange = middleRange - rangeBand * 0.5f;
-            if (squaredDistance > attackBandRange * attackBandRange) { flyCloser = true; }
-            if (squaredDistance < flyingBandRange * flyingBandRange) { flyAway = true; }
-
-            if (flyAway)
+            if (!AttackedByPlayer)
             {
-                if (squaredDistance < middleRange * middleRange)
-                {
-                    body.velocity = distance.normalized * -speed;
-                }
-                else
-                {
-                    flyAway = false;
-                }
+                body.velocity = Vector2.zero;
+                return;
             }
-            else if (flyCloser)
+        }
+
+        if (squaredDistance > attackRange * attackRange)
+        {
+            body.velocity = distance.normalized * speed;
+            lastAttackTime = Time.time;
+            return;
+        }
+
+        // Oscillate between attackRange and flyingRange.
+        float middleRange = (attackRange + flyingRange) * 0.5f;
+        float attackBandRange = middleRange + rangeBand * 0.5f;
+        float flyingBandRange = middleRange - rangeBand * 0.5f;
+        if (squaredDistance > attackBandRange * attackBandRange) { flyCloser = true; }
+        if (squaredDistance < flyingBandRange * flyingBandRange) { flyAway = true; }
+
+        if (flyAway)
+        {
+            if (squaredDistance < middleRange * middleRange)
             {
-                if (squaredDistance > middleRange * middleRange)
-                {
-                    body.velocity = distance.normalized * speed;
-                }
-                else
-                {
-                    flyCloser = false;
-                }
+                body.velocity = distance.normalized * -speed;
             }
             else
             {
-                body.velocity = Vector2.zero;
+                flyAway = false;
             }
-
-            if (Time.time - lastAttackTime < attackCooldown) { return; }
-            lastAttackTime += attackCooldown;
-            var projectile = Instantiate(projectilePrefab, transform.position, transform.rotation, projectileParent);
-            projectile.SetTarget(playerBase.transform, Damage);
+        }
+        else if (flyCloser)
+        {
+            if (squaredDistance > middleRange * middleRange)
+            {
+                body.velocity = distance.normalized * speed;
+            }
+            else
+            {
+                flyCloser = false;
+            }
+        }
+        else
+        {
+            body.velocity = Vector2.zero;
         }
     }
 }

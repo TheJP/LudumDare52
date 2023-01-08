@@ -7,7 +7,7 @@ using UnityEngine;
 public class EnemyPrefab
 {
     [field: SerializeField]
-    public EnemyHealth Prefab { get; set; }
+    public Enemy Prefab { get; set; }
 
     [field: SerializeField]
     public int DifficultyRating { get; set; }
@@ -69,7 +69,7 @@ public class ResourceFieldManager : MonoBehaviour
         };
         newField.UpdateResourceType(type);
         fields.Add(newField);
-        SpawnEnemies(newField.EnemySpawnParent);
+        SpawnEnemies(newField);
     }
 
     private Vector2 RandomFieldPosition()
@@ -92,8 +92,10 @@ public class ResourceFieldManager : MonoBehaviour
         return fieldPosition;
     }
 
-    private void SpawnEnemies(Transform spawnPointsParent)
+    private void SpawnEnemies(ResourceField field)
     {
+        var spawnPointsParent = field.EnemySpawnParent;
+
         const int Tries = 100;
         int currentTry = 0;
         EnemyPrefab[] selected;
@@ -117,7 +119,9 @@ public class ResourceFieldManager : MonoBehaviour
         {
             var spawnPoint = spawnPoints.Skip(Random.Range(0, spawnPoints.Count)).First();
             spawnPoints.Remove(spawnPoint);
-            Instantiate(prefab.Prefab, spawnPoint.position, spawnPoint.rotation, enemyParent);
+            var enemy = Instantiate(prefab.Prefab, spawnPoint.position, spawnPoint.rotation, enemyParent);
+            enemy.Protectee = field;
+            field.AddProtector(enemy);
         }
     }
 }

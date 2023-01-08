@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,13 +15,16 @@ public class ResourceField : MonoBehaviour
 
     private ResourceType currentType = ResourceType.None;
 
-    public event System.Action OnCollected;
+    public event Action OnCollected;
+
+    private readonly List<Enemy> protectors = new();
+    private bool gotAttackedBefore = false;
 
     public void Start()
     {
         foreach (var resource in GetComponentsInChildren<Resource>())
         {
-            resource.OnCollected += CheckEmpty;
+            resource.OnCollected += OnResourceBlobCollected;
         }
     }
 
@@ -40,11 +44,25 @@ public class ResourceField : MonoBehaviour
         }
     }
 
-    private void CheckEmpty()
+    private void OnResourceBlobCollected()
     {
+        GotAttacked(); // Resource "stealing" is treated as attack.
         if (GetComponentsInChildren<Resource>().All(r => r.Collected))
         {
             OnCollected?.Invoke();
         }
     }
+
+    public void GotAttacked()
+    {
+        if (gotAttackedBefore) { return; }
+        gotAttackedBefore = true;
+
+        foreach (var protector in protectors.Where(p => p != null))
+        {
+            protector.GotAttacked();
+        }
+    }
+
+    public void AddProtector(Enemy enemy) => protectors.Add(enemy);
 }

@@ -318,9 +318,9 @@ MonoBehaviour:
   <CurrentDifficulty>k__BackingField: 10
   enemyParent: {fileID: 1730082704}
   enemyPrefabs:
-  - <Prefab>k__BackingField: {fileID: 1618223481886580442, guid: feb61ce306ff8744dac6be068a62eff3, type: 3}
+  - <Prefab>k__BackingField: {fileID: 1105531145745817357, guid: feb61ce306ff8744dac6be068a62eff3, type: 3}
     <DifficultyRating>k__BackingField: 1
-  - <Prefab>k__BackingField: {fileID: 3851139691674151076, guid: 3485ab07bd860cd4b95d1b80fc0bf7e8, type: 3}
+  - <Prefab>k__BackingField: {fileID: 3851139691674151083, guid: 3485ab07bd860cd4b95d1b80fc0bf7e8, type: 3}
     <DifficultyRating>k__BackingField: 2
 --- !u!1001 &5356421096789280763
 PrefabInstance:

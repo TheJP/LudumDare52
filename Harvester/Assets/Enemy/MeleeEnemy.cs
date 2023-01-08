@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
-public class MeleeEnemy : MonoBehaviour
+public class MeleeEnemy : Enemy
 {
     private Rigidbody2D body;
 
@@ -48,12 +48,23 @@ public class MeleeEnemy : MonoBehaviour
     public void FixedUpdate()
     {
         transform.Rotate(0, 0, (attacking ? turnSpeedAttacking : turnSpeed) * Time.fixedDeltaTime);
-
         Vector2 distance = playerBase.transform.position - transform.position;
-        if (distance.sqrMagnitude > range * range)
+
+        if (Protectee == null)
         {
-            body.velocity = Vector2.zero;
-            return;
+            if (distance.sqrMagnitude > range * range)
+            {
+                body.velocity = Vector2.zero;
+                return;
+            }
+        }
+        else
+        {
+            if (!AttackedByPlayer)
+            {
+                body.velocity = Vector2.zero;
+                return;
+            }
         }
 
         body.velocity = distance.normalized * speed;
