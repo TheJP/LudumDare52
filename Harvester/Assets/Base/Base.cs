@@ -10,6 +10,8 @@ public class Base : MonoBehaviour
     private Vector3 targetPosition;
     private ResourceManager resourceManager;
 
+    private float flyingTime = 0f;
+
     public void Start()
     {
         targetPosition = transform.position;
@@ -35,6 +37,14 @@ public class Base : MonoBehaviour
         else
         {
             transform.position += distance.normalized * step;
+            flyingTime += Time.deltaTime;
+        }
+
+        if (flyingTime > 1)
+        {
+            int fuel = Mathf.FloorToInt(flyingTime);
+            flyingTime -= fuel;
+            resourceManager.UpdateStockpile(ResourceType.Fuel, -fuel);
         }
     }
 
