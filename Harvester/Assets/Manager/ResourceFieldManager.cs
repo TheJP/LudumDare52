@@ -33,7 +33,7 @@ public class ResourceFieldManager : MonoBehaviour
         newField.OnCollected += () =>
         {
             SpawnField(type);
-            Destroy(newField.gameObject);
+            Destroy(newField.gameObject, 10); // Delay spawn so resources have time to arrive at base (visually).
         };
         newField.UpdateResourceType(type);
         fields.Add(newField);

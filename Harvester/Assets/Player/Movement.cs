@@ -43,14 +43,14 @@ public class Movement : MonoBehaviour
     {
         float targetRotation = Mathf.Rad2Deg * Mathf.Atan2(move.y, move.x);
         float rotationDistance = Mathf.DeltaAngle(rotation, targetRotation);
-        if (Mathf.Abs(rotationDistance) < turnSpeed * Time.deltaTime)
+        if (Mathf.Abs(rotationDistance) < turnSpeed * Time.fixedDeltaTime)
         {
             rotation = targetRotation;
         }
         else
         {
             var rotateDirection = Mathf.Sign(Mathf.DeltaAngle(rotation, targetRotation));
-            rotation += rotateDirection * turnSpeed * Time.deltaTime;
+            rotation += rotateDirection * turnSpeed * Time.fixedDeltaTime;
         }
         turnObject.rotation = Quaternion.Euler(0, 0, rotation);
     }

@@ -45,18 +45,17 @@ public class Resource : MonoBehaviour
 
     public void FixedUpdate()
     {
-        if (targetBase != null)
+        if (targetBase == null) { return; }
+
+        var distance = targetBase.transform.position - transform.position;
+        var stepDistance = collectSpeed * Time.fixedDeltaTime;
+        if (distance.sqrMagnitude >= stepDistance * stepDistance)
         {
-            var distance = targetBase.transform.position - transform.position;
-            var stepDistance = collectSpeed * Time.deltaTime;
-            if (distance.sqrMagnitude >= stepDistance * stepDistance)
-            {
-                body.velocity = distance.normalized * collectSpeed;
-            }
-            else
-            {
-                Destroy(gameObject);
-            }
+            body.velocity = distance.normalized * collectSpeed;
+        }
+        else
+        {
+            Destroy(gameObject);
         }
     }
 

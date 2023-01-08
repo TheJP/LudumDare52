@@ -27,6 +27,9 @@ public class ResourceManager : MonoBehaviour
     [SerializeField]
     private ResourceManagerEntry[] resourceMaximum;
 
+    [SerializeField]
+    private Color blinkColour = Color.red;
+
     private readonly Dictionary<ResourceType, Label> labels = new();
     private readonly Dictionary<ResourceType, ProgressBar> bars = new();
     private readonly HashSet<ResourceType> maxedOut = new();
@@ -90,14 +93,13 @@ public class ResourceManager : MonoBehaviour
         }
 
         if (!Application.isPlaying) { return; }
-        Debug.Log("playing");
 
         foreach (var resource in resources)
         {
             if (!labels.ContainsKey(resource.Type)) { continue; }
             var label = labels[resource.Type];
             var isRed = Mathf.RoundToInt(Time.time) % 2 == 0 && maxedOut.Contains(resource.Type);
-            label.style.color = new StyleColor(isRed ? Color.red : defaultColours[resource.Type]);
+            label.style.color = new StyleColor(isRed ? blinkColour : defaultColours[resource.Type]);
         }
     }
 

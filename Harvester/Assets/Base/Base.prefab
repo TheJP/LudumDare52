@@ -266,6 +266,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6441161814876583234}
   - component: {fileID: 117160382425900394}
+  - component: {fileID: 2805864637018531186}
   - component: {fileID: 6441161814876583293}
   m_Layer: 0
   m_Name: Base
@@ -304,6 +305,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 1
+--- !u!114 &2805864637018531186
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6441161814876583292}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68f5404bd589a9f42a41d7dd941fdef5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  turretPrefabs:
+  - <Type>k__BackingField: 0
+    <Prefab>k__BackingField: {fileID: 241630473282012453, guid: 406426a66d0f6744eaa05779747c6105, type: 3}
+  spawnPointParent: {fileID: 6693480109649276391}
 --- !u!50 &6441161814876583293
 Rigidbody2D:
   serializedVersion: 4
