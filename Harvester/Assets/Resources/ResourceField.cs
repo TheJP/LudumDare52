@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,13 +9,16 @@ public class ResourceField : MonoBehaviour
     [field: SerializeField]
     public ResourceType Type { get; private set; }
 
+    [field: SerializeField]
+    public Transform EnemySpawnParent { get; private set; }
+
     private ResourceType currentType = ResourceType.None;
 
-    public event Action OnCollected;
+    public event System.Action OnCollected;
 
     public void Start()
     {
-        foreach(var resource in GetComponentsInChildren<Resource>())
+        foreach (var resource in GetComponentsInChildren<Resource>())
         {
             resource.OnCollected += CheckEmpty;
         }
