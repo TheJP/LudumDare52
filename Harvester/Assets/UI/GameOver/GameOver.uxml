@@ -1,0 +1,6 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:VisualElement style="width: 100%; height: 100%; align-items: center; justify-content: center;">
+        <ui:Label text="Game Over" display-tooltip-when-elided="true" style="color: rgb(238, 238, 238); font-size: 80px;" />
+        <ui:Button text="Play Again" display-tooltip-when-elided="true" name="play-again-button" />
+    </ui:VisualElement>
+</ui:UXML>

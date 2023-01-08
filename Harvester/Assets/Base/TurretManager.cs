@@ -31,7 +31,6 @@ public class TurretManager : MonoBehaviour
             freeSpawns.Add(child);
         }
         freeSpawns.Remove(spawnPointParent);
-        SpawnTurret(TurretType.Small);
     }
 
     public bool SpawnTurret(TurretType type)

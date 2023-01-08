@@ -1,0 +1,15 @@
+.resource-icon {
+    width: 20px;
+    height: 20px;
+    -unity-background-scale-mode: stretch-to-fill;
+}
+
+.resource-label {
+    color: rgb(238, 238, 238);
+    margin-left: 5px;
+}
+
+.resource-box {
+    flex-direction: row;
+    align-items: center;
+}

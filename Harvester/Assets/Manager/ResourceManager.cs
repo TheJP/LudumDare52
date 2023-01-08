@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 
 [Serializable]
@@ -103,6 +104,8 @@ public class ResourceManager : MonoBehaviour
         }
     }
 
+    public Dictionary<ResourceType, int> GetStockCounts() => resources.ToDictionary(entry => entry.Type, entry => entry.Value);
+
     public bool UpdateStockpile(ResourceType type, int amount = 1)
     {
         foreach (var resource in resources)
@@ -110,6 +113,13 @@ public class ResourceManager : MonoBehaviour
             if (resource.Type != type) { continue; }
             var max = MaxValue(type);
             var newValue = resource.Value + amount;
+
+            // GameOver Condition
+            if (resource.Type == ResourceType.Health && newValue <= 0)
+            {
+                SceneManager.LoadScene(1);
+            }
+
             if (0 <= newValue && newValue <= max)
             {
                 resource.Value = newValue;
