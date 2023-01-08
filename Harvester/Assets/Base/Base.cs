@@ -38,5 +38,6 @@ public class Base : MonoBehaviour
         }
     }
 
+    // TODO: Make damage taken more visible.
     public bool UpdateHealth(int amount) => resourceManager.UpdateStockpile(ResourceType.Health, amount);
 }

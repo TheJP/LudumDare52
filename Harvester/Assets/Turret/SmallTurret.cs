@@ -53,7 +53,7 @@ public class SmallTurret : Turret
         if (currentTarget == null) { return; }
 
         // Turn turret to face target
-        var distance = currentTarget.position - transform.position;
+        Vector2 distance = currentTarget.position - transform.position;
         var targetAngle = Mathf.Rad2Deg * Mathf.Atan2(distance.y, distance.x);
         var deltaAngle = Mathf.DeltaAngle(currentAngle, targetAngle);
         if (Mathf.Abs(deltaAngle) > turnSpeed * Time.deltaTime)
@@ -82,7 +82,7 @@ public class SmallTurret : Turret
         float closestDistance = float.PositiveInfinity;
         foreach (var result in results.Where(r => r.CompareTag(EnemyTag)))
         {
-            var distance = (result.transform.position - transform.position).sqrMagnitude;
+            var distance = ((Vector2)result.transform.position - (Vector2)transform.position).sqrMagnitude;
             if (distance < closestDistance)
             {
                 closest = result.transform;

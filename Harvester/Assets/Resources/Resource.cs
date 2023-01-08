@@ -47,7 +47,7 @@ public class Resource : MonoBehaviour
     {
         if (targetBase == null) { return; }
 
-        var distance = targetBase.transform.position - transform.position;
+        Vector2 distance = targetBase.transform.position - transform.position;
         var stepDistance = collectSpeed * Time.fixedDeltaTime;
         if (distance.sqrMagnitude >= stepDistance * stepDistance)
         {

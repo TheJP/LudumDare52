@@ -49,7 +49,7 @@ public class MeleeEnemy : MonoBehaviour
     {
         transform.Rotate(0, 0, (attacking ? turnSpeedAttacking : turnSpeed) * Time.fixedDeltaTime);
 
-        var distance = playerBase.transform.position - transform.position;
+        Vector2 distance = playerBase.transform.position - transform.position;
         if (distance.sqrMagnitude > range * range)
         {
             body.velocity = Vector2.zero;
