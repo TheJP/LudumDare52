@@ -3,13 +3,20 @@
     <ui:VisualElement style="bottom: 0; position: absolute; width: 100%; flex-direction: row; justify-content: center;">
         <ui:VisualElement class="outer-box">
             <ui:VisualElement class="element-box">
-                <ui:Button text="Buy" display-tooltip-when-elided="true" name="buy-button" />
+                <ui:Button text="Buy&#10;..." display-tooltip-when-elided="true" name="buy-button" class="panel-button" />
             </ui:VisualElement>
-            <ui:VisualElement class="element-box" style="width: 50px; align-items: center;">
-                <ui:Label text="100" display-tooltip-when-elided="true" name="countdown-label" style="color: rgb(255, 255, 255);" />
+            <ui:VisualElement class="element-box" style="width: 130px; align-items: center;">
+                <ui:Label text="Next Wave" display-tooltip-when-elided="true" class="wave-label" />
+                <ui:Label text="100" display-tooltip-when-elided="true" name="countdown-label" class="wave-label" style="color: rgb(255, 255, 255);" />
             </ui:VisualElement>
             <ui:VisualElement class="element-box">
-                <ui:Button text="Scan" display-tooltip-when-elided="true" name="scan-button" />
+                <ui:Button display-tooltip-when-elided="true" name="scan-button" class="panel-button">
+                    <ui:Label text="Scan" display-tooltip-when-elided="true" />
+                    <ui:VisualElement style="flex-direction: row; align-items: center;">
+                        <ui:VisualElement style="width: 20px; height: 20px; background-image: url(&apos;project://database/Assets/UI/ResourceDisplay/Research.png?fileID=2800000&amp;guid=21694c3f1a5dac6418f69b761aadc5d8&amp;type=3#Research&apos;); -unity-background-image-tint-color: rgb(148, 0, 255);" />
+                        <ui:Label text=" 5" display-tooltip-when-elided="true" style="color: rgb(148, 0, 255);" />
+                    </ui:VisualElement>
+                </ui:Button>
             </ui:VisualElement>
         </ui:VisualElement>
     </ui:VisualElement>

@@ -1,3 +1,75 @@
+.turret-entry {
+    justify-content: space-between;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    background-color: rgb(34, 34, 34);
+    transition-property: background-color;
+    transition-duration: 0.5s;
+    font-size: 20px;
+    color: rgba(238, 238, 238, 255);
+    align-items: center;
+}
+
+.turret-entry:hover {
+    background-color: rgb(40, 40, 40);
+}
+
+.turret-entry-item {
+    margin-bottom: 10px;
+}
+
+.turret-title {
+}
+
+.turret-description-box {
+    flex-direction: row;
+}
+
+.turret-description {
+    font-size: 12px;
+    flex-wrap: wrap;
+    margin-right: 5px;
+}
+
+.turret-description-image {
+    background-image: url('project://database/Assets/Turret/SmallTurret.png?fileID=21300000&guid=ad5464a9427700b46ac9a46d563d433e&type=3#SmallTurret');
+    width: 50px;
+    height: 50px;
+    -unity-background-scale-mode: scale-to-fit;
+    transition-property: rotate;
+    transition-duration: 0.5s;
+}
+
+.turret-entry:hover .turret-description-image {
+    rotate: 180deg;
+}
+
+.buy-button {
+    border-left-color: rgb(255, 255, 255);
+    border-right-color: rgb(255, 255, 255);
+    border-top-color: rgb(255, 255, 255);
+    border-bottom-color: rgb(255, 255, 255);
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border-left-width: 1px;
+    border-right-width: 1px;
+    border-top-width: 1px;
+    border-bottom-width: 1px;
+    background-color: rgb(34, 34, 34);
+}
+
+.buy-button:hover {
+    background-color: rgba(51, 51, 51, 255);
+}
+
 .resource-icon {
     width: 20px;
     height: 20px;
