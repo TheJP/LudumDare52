@@ -255,6 +255,14 @@ PrefabInstance:
       propertyPath: <IsAggressive>k__BackingField
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1618223481886580442, guid: feb61ce306ff8744dac6be068a62eff3, type: 3}
+      propertyPath: <Health>k__BackingField
+      value: 400
+      objectReference: {fileID: 0}
+    - target: {fileID: 1618223481886580442, guid: feb61ce306ff8744dac6be068a62eff3, type: 3}
+      propertyPath: <MaxHealth>k__BackingField
+      value: 400
+      objectReference: {fileID: 0}
     - target: {fileID: 3418817732062990564, guid: feb61ce306ff8744dac6be068a62eff3, type: 3}
       propertyPath: m_RootOrder
       value: 6

@@ -55,7 +55,7 @@ MonoBehaviour:
   turnSpeed: 20
   turnSpeedAttacking: 360
   attackDamage: 1
-  attackCooldown: 0.5
+  attackCooldown: 1
 --- !u!114 &1618223481886580442
 MonoBehaviour:
   m_ObjectHideFlags: 0

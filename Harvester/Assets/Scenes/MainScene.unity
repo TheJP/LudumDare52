@@ -465,6 +465,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fieldPrefabs:
   - {fileID: 3608550276565174226, guid: 57583b830c2e3c94db58953058b863d2, type: 3}
+  - {fileID: 3608550276565174226, guid: bdaf867582233be43940c48e57b3bbdf, type: 3}
+  - {fileID: 3608550276565174226, guid: f73482b7e6ee72c43805a54f7efbd680, type: 3}
   spawnRange: 50
   protectedRange: 20
   <CurrentDifficulty>k__BackingField: 10
@@ -546,8 +548,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca28cdd53be364643a042c0fb6744e6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  graceTime: 1000
-  waveCooldown: 20
+  graceTime: 100
+  waveCooldown: 30
   minimalSpawnDistance: 20
   enemyParent: {fileID: 1730082704}
   waveUi: {fileID: 1199140122}
@@ -571,7 +573,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   indicatorUi: {fileID: 167442015}
   scanRadius: 100
-  scanDuration: 10
+  scanDuration: 25
 --- !u!1001 &5356421096789280763
 PrefabInstance:
   m_ObjectHideFlags: 0

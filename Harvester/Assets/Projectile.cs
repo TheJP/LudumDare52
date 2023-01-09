@@ -26,7 +26,7 @@ public abstract class Projectile : MonoBehaviour
     {
         if (Target == null)
         {
-            body.velocity = Vector3.zero;
+            Destroy(gameObject);
             return;
         }
 
