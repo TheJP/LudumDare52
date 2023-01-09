@@ -6,7 +6,7 @@
                 <ui:Button text="Buy&#10;..." display-tooltip-when-elided="true" name="buy-button" class="panel-button" />
             </ui:VisualElement>
             <ui:VisualElement class="element-box" style="width: 130px; align-items: center;">
-                <ui:Label text="Next Wave" display-tooltip-when-elided="true" class="wave-label" />
+                <ui:Label text="Next Wave" display-tooltip-when-elided="true" name="wave-label" class="wave-label" />
                 <ui:Label text="100" display-tooltip-when-elided="true" name="countdown-label" class="wave-label" style="color: rgb(255, 255, 255);" />
             </ui:VisualElement>
             <ui:VisualElement class="element-box">

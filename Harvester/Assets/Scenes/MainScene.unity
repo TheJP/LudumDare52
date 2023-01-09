@@ -495,9 +495,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca28cdd53be364643a042c0fb6744e6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  waveCooldown: 10
+  graceTime: 0
+  waveCooldown: 20
   minimalSpawnDistance: 20
   enemyParent: {fileID: 1730082704}
+  waveUi: {fileID: 1199140122}
   wavePrefabs:
   - {fileID: 1726664228652906406, guid: ffc14543122c695499bfe3907d6bea8c, type: 3}
   - {fileID: 6070731567693891813, guid: 28b531e81174a854b97a7afcd3575b4d, type: 3}

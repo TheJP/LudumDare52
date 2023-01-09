@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class WaveManager : MonoBehaviour
 {
@@ -17,6 +18,9 @@ public class WaveManager : MonoBehaviour
     private Transform enemyParent;
 
     [SerializeField]
+    private UIDocument waveUi;
+
+    [SerializeField]
     private GameObject[] wavePrefabs;
 
     [SerializeField]
@@ -26,8 +30,15 @@ public class WaveManager : MonoBehaviour
     private Movement player;
     private float startWave;
 
+    private Label waveHeading;
+    private Label waveCountdown;
+
     public void Start()
     {
+        waveHeading = waveUi.rootVisualElement.Q<Label>("wave-label");
+        waveCountdown = waveUi.rootVisualElement.Q<Label>("countdown-label");
+        waveHeading.text = "First Wave";
+
         playerBase = FindObjectOfType<Base>();
         player = FindObjectOfType<Movement>();
         startWave = Time.time + graceTime - waveCooldown;
@@ -35,8 +46,17 @@ public class WaveManager : MonoBehaviour
 
     private void Update()
     {
-        if (NextWave >= wavePrefabs.Length) { return; } // TODO: Victory Screen?
-        if (Time.time - startWave < waveCooldown) { return; }
+        if (NextWave >= wavePrefabs.Length)
+        {
+            // TODO: Victory Screen?
+            waveCountdown.text = "";
+            return;
+        }
+
+        float countdown = waveCooldown - (Time.time - startWave);
+        waveCountdown.text = countdown < 10f ? $"{countdown:F1}" : $"{countdown:F0}";
+
+        if (countdown > 0f) { return; }
         startWave = Time.time;
 
         Vector2 distance = playerBase.transform.position - player.transform.position;
@@ -45,5 +65,7 @@ public class WaveManager : MonoBehaviour
         Vector2 spawnPosition = middle + spawnRadius * (Vector2)Random.onUnitSphere;
         Instantiate(wavePrefabs[NextWave], spawnPosition, Quaternion.identity, enemyParent);
         ++NextWave;
+
+        waveHeading.text = $"Wave {NextWave}/{wavePrefabs.Length}";
     }
 }
