@@ -20,6 +20,13 @@ public class Base : MonoBehaviour
 
     public void Update()
     {
+        var currentFuel = resourceManager.GetStockCounts()[ResourceType.Fuel];
+        if (currentFuel <= 0)
+        {
+            targetPosition = transform.position;
+            return;
+        }
+
         var distance = targetPosition - transform.position;
         var step = speed * Time.deltaTime;
         if (distance.sqrMagnitude < step * step)
