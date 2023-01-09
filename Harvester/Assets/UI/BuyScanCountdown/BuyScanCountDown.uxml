@@ -1,6 +1,6 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/UI/BuyScanCountdown/BuyScanCountdown.uss?fileID=7433441132597879392&amp;guid=497fd41a1a103f14e8303c36d299443a&amp;type=3#BuyScanCountdown" />
-    <ui:VisualElement style="bottom: 0; position: absolute; width: 100%; flex-direction: row; justify-content: center;">
+    <ui:VisualElement picking-mode="Ignore" style="bottom: 0; position: absolute; width: 100%; flex-direction: row; justify-content: center;">
         <ui:VisualElement class="outer-box">
             <ui:VisualElement class="element-box">
                 <ui:Button text="Buy&#10;..." display-tooltip-when-elided="true" name="buy-button" class="panel-button" />

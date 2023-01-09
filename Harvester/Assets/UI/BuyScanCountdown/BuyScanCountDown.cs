@@ -42,9 +42,4 @@ public class BuyScanCountDown : MonoBehaviour
             buyInterface.rootVisualElement.visible = false;
         });
     }
-
-    public void Update()
-    {
-
-    }
 }

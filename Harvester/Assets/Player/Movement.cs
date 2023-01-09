@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(PlayerInput))]
@@ -62,5 +63,12 @@ public class Movement : MonoBehaviour
 
     private Vector2 pointer = Vector2.zero;
     public void OnPoint(InputValue value) => pointer = value.Get<Vector2>();
-    public void OnClick() => playerBase.OnClick(pointer);
+    // We have to defer call to IsPointerOverGameObject, because it should not be called during event handling.
+    public void OnClick() => StartCoroutine(DelayedClick());
+    private IEnumerator DelayedClick()
+    {
+        yield return null;
+        if (EventSystem.current.IsPointerOverGameObject()) { yield break; }
+        playerBase.OnClick(pointer);
+    }
 }

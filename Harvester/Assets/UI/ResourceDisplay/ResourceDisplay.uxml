@@ -1,6 +1,6 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/UI/ResourceDisplay/ResourceDisplay.uss?fileID=7433441132597879392&amp;guid=9a0fb4be589371341ad3b5f86b42731b&amp;type=3#ResourceDisplay" />
-    <ui:VisualElement style="align-items: center;">
+    <ui:VisualElement picking-mode="Ignore" style="align-items: center;">
         <ui:VisualElement class="resource-box">
             <ui:VisualElement style="flex-direction: row;">
                 <ui:VisualElement class="resource">
