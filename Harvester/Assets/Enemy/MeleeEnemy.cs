@@ -50,21 +50,16 @@ public class MeleeEnemy : Enemy
         transform.Rotate(0, 0, (attacking ? turnSpeedAttacking : turnSpeed) * Time.fixedDeltaTime);
         Vector2 distance = playerBase.transform.position - transform.position;
 
-        if (Protectee == null)
+        if (!IsAggressive && Protectee != null)
         {
-            if (distance.sqrMagnitude > range * range)
-            {
-                body.velocity = Vector2.zero;
-                return;
-            }
+            body.velocity = Vector2.zero;
+            return;
         }
-        else
+
+        if (!IsAggressive && distance.sqrMagnitude > range * range)
         {
-            if (!AttackedByPlayer)
-            {
-                body.velocity = Vector2.zero;
-                return;
-            }
+            body.velocity = Vector2.zero;
+            return;
         }
 
         body.velocity = distance.normalized * speed;

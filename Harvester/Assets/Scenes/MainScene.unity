@@ -340,6 +340,7 @@ GameObject:
   - component: {fileID: 2036701644}
   - component: {fileID: 2036701646}
   - component: {fileID: 2036701645}
+  - component: {fileID: 2036701650}
   - component: {fileID: 2036701647}
   - component: {fileID: 2036701648}
   - component: {fileID: 2036701649}
@@ -482,6 +483,27 @@ MonoBehaviour:
   m_DeselectOnBackgroundClick: 1
   m_PointerBehavior: 0
   m_CursorLockBehavior: 0
+--- !u!114 &2036701650
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2036701643}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca28cdd53be364643a042c0fb6744e6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  waveCooldown: 10
+  minimalSpawnDistance: 20
+  enemyParent: {fileID: 1730082704}
+  wavePrefabs:
+  - {fileID: 1726664228652906406, guid: ffc14543122c695499bfe3907d6bea8c, type: 3}
+  - {fileID: 6070731567693891813, guid: 28b531e81174a854b97a7afcd3575b4d, type: 3}
+  - {fileID: 2451548381900308804, guid: 1ed660c32c99d1a42a061de1cdf63216, type: 3}
+  - {fileID: 2451548381900308804, guid: bb2689bd4ecbf4d40af635944a6ff600, type: 3}
+  - {fileID: 1001945350935920716, guid: c91ae27d8e97f274a99e3e99cabe72e1, type: 3}
 --- !u!1001 &5356421096789280763
 PrefabInstance:
   m_ObjectHideFlags: 0

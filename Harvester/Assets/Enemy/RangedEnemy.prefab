@@ -48,6 +48,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d683a07124db3c448a3e68d028cfdb3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <IsAggressive>k__BackingField: 0
   speed: 2.5
   turnSpeed: 180
   targetRange: 15
@@ -182,7 +183,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: da371945dd439ea4c9c4aaa28311ad56, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.7254902, g: 0.05490196, b: 0.039215688, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

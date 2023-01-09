@@ -5,7 +5,8 @@ using UnityEngine;
 
 public abstract class Enemy : MonoBehaviour
 {
-    protected bool AttackedByPlayer { get; private set; } = false;
+    [field: SerializeField]
+    protected bool IsAggressive { get; private set; } = false;
 
     /// <summary>
     /// ResourceField this enemy should protect.
@@ -13,5 +14,5 @@ public abstract class Enemy : MonoBehaviour
     /// </summary>
     public ResourceField Protectee { get; set; } = null;
 
-    public void GotAttacked() => AttackedByPlayer = true;
+    public void GotAttacked() => IsAggressive = true;
 }

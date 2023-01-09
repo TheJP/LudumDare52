@@ -77,21 +77,16 @@ public class RangedEnemy : Enemy
             transform.rotation = Quaternion.Euler(0, 0, currentAngle);
         }
 
-        if (Protectee == null)
+        if (!IsAggressive && Protectee != null)
         {
-            if (squaredDistance > targetRange * targetRange)
-            {
-                body.velocity = Vector2.zero;
-                return;
-            }
+            body.velocity = Vector2.zero;
+            return;
         }
-        else
+
+        if (!IsAggressive && squaredDistance > targetRange * targetRange)
         {
-            if (!AttackedByPlayer)
-            {
-                body.velocity = Vector2.zero;
-                return;
-            }
+            body.velocity = Vector2.zero;
+            return;
         }
 
         if (squaredDistance > attackRange * attackRange)
