@@ -75,7 +75,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: ad5464a9427700b46ac9a46d563d433e, type: 3}
-  m_Color: {r: 0.060147285, g: 0, b: 1, a: 1}
+  m_Color: {r: 0.3647059, g: 0.73333335, b: 0.3882353, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -136,6 +136,7 @@ MonoBehaviour:
   turretRange: 10
   turnSpeed: 90
   aquireTargetCooldown: 1
+  <Damage>k__BackingField: 20
 --- !u!1 &3575559411468478960
 GameObject:
   m_ObjectHideFlags: 0

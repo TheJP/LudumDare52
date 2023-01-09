@@ -12,7 +12,7 @@
     transition-property: background-color;
     transition-duration: 0.5s;
     font-size: 20px;
-    color: rgba(238, 238, 238, 255);
+    color: rgb(238, 238, 238);
     align-items: center;
 }
 
@@ -44,6 +44,7 @@
     -unity-background-scale-mode: scale-to-fit;
     transition-property: rotate;
     transition-duration: 0.5s;
+    -unity-background-image-tint-color: rgba(93, 187, 99, 255);
 }
 
 .turret-entry:hover .turret-description-image {
@@ -67,7 +68,7 @@
 }
 
 .buy-button:hover {
-    background-color: rgba(51, 51, 51, 255);
+    background-color: rgb(51, 51, 51);
 }
 
 .resource-icon {
