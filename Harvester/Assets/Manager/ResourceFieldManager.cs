@@ -33,16 +33,21 @@ public class ResourceFieldManager : MonoBehaviour
     [SerializeField]
     private EnemyPrefab[] enemyPrefabs;
 
+    [SerializeField]
+    private float spawnCooldown = 100f;
+
     private Base playerBase;
     private Movement player;
 
     private readonly HashSet<ResourceField> fields = new();
     public IEnumerable<ResourceField> Fields => fields.AsEnumerable();
+    private float lastSpawn;
 
     public void Start()
     {
         playerBase = FindObjectOfType<Base>();
         player = FindObjectOfType<Movement>();
+        lastSpawn = Time.time;
     }
 
     public void Update()
@@ -54,6 +59,11 @@ public class ResourceFieldManager : MonoBehaviour
                 SpawnField(type);
             }
         }
+
+        if (Time.time - lastSpawn < spawnCooldown) { return; }
+        lastSpawn = Time.time;
+        var types = ResourceTypeExtensions.Types;
+        SpawnField(types[Random.Range(0, types.Length)]);
     }
 
     private void SpawnField(ResourceType type)
@@ -75,13 +85,15 @@ public class ResourceFieldManager : MonoBehaviour
 
     private Vector2 RandomFieldPosition()
     {
+        Vector2 middle = (playerBase.transform.position + player.transform.position) * 0.5f;
+
         const int Tries = 100;
         int currentTry = 0;
         Vector2 fieldPosition;
         do
         {
             ++currentTry;
-            fieldPosition = Random.insideUnitCircle * spawnRange;
+            fieldPosition = middle + Random.insideUnitCircle * spawnRange;
         } while (
             currentTry < Tries && (
                 (fieldPosition - (Vector2)player.transform.position).sqrMagnitude <= protectedRange * protectedRange ||
