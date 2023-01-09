@@ -33,9 +33,11 @@ public class ResourceFieldManager : MonoBehaviour
     [SerializeField]
     private EnemyPrefab[] enemyPrefabs;
 
-    private readonly HashSet<ResourceField> fields = new();
     private Base playerBase;
     private Movement player;
+
+    private readonly HashSet<ResourceField> fields = new();
+    public IEnumerable<ResourceField> Fields => fields.AsEnumerable();
 
     public void Start()
     {
@@ -63,7 +65,6 @@ public class ResourceFieldManager : MonoBehaviour
 
         newField.OnCollected += () =>
         {
-            //SpawnField(type);
             fields.Remove(newField);
             Destroy(newField.gameObject, 10); // Delay destroy so resources have time to arrive at base (visually).
         };

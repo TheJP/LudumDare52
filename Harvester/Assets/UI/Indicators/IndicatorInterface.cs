@@ -1,22 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class IndicatorManager : MonoBehaviour
+[RequireComponent(typeof(ResourceManager))]
+[RequireComponent(typeof(ResourceFieldManager))]
+public class IndicatorInterface : MonoBehaviour
 {
-    public record Indicator
+    public class Indicator
     {
         public Sprite Sprite { get; }
         public Color Tint { get; }
         public System.Func<Vector2> GetPosition { get; }
-        public bool ShowDistance { get; }
-        public Indicator(Sprite sprite, System.Func<Vector2> getPosition, Color? tint = null, bool showDistance = false)
+        public Indicator(Sprite sprite, System.Func<Vector2> getPosition, Color? tint = null)
         {
             Sprite = sprite;
             Tint = tint ?? Color.white;
             GetPosition = getPosition;
-            ShowDistance = showDistance;
         }
     }
 
@@ -26,17 +27,52 @@ public class IndicatorManager : MonoBehaviour
     [SerializeField]
     private UIDocument indicatorUi;
 
-    private readonly Dictionary<Indicator, VisualElement> indicators = new();
+    [SerializeField]
+    private float scanRadius = 30f;
+
+    [SerializeField]
+    private float scanDuration = 10f;
+
     private Movement player;
+    private ResourceManager resourceManager;
+    private ResourceFieldManager resourceFieldManager;
+
+    private readonly Dictionary<Indicator, VisualElement> indicators = new();
 
     public void Start()
     {
         var playerBase = FindObjectOfType<Base>();
         player = FindObjectOfType<Movement>();
+        resourceManager = GetComponent<ResourceManager>();
+        resourceFieldManager = GetComponent<ResourceFieldManager>();
+
         indicatorUi.rootVisualElement.Clear();
 
         var baseSprite = playerBase.GetComponentInChildren<SpriteRenderer>();
         AddIndicator(new Indicator(baseSprite.sprite, () => playerBase.transform.position, baseSprite.color));
+    }
+
+    public void Scan()
+    {
+        var scanSuccess = resourceManager.UpdateStockpile(ResourceType.Research, -5);
+        if (!scanSuccess) { return; }
+
+        //var results = Physics2D.OverlapCircleAll(player.transform.position, scanRadius); // <- TODO: scan for enemies
+        foreach (var field in resourceFieldManager.Fields.Where(f => (f.transform.position - player.transform.position).sqrMagnitude < scanRadius * scanRadius))
+        {
+            var resourceSprite = field.GetComponentInChildren<SpriteRenderer>();
+            var indicator = new Indicator(resourceSprite.sprite, () => field.transform != null ? field.transform.position : player.transform.position, resourceSprite.color);
+            AddIndicator(indicator);
+
+            field.OnCollected += () => RemoveIndicator(indicator);
+            StartCoroutine(TimedRemove(indicator));
+        }
+    }
+
+    private IEnumerator TimedRemove(Indicator indicator)
+    {
+        yield return new WaitForSeconds(scanDuration);
+        RemoveIndicator(indicator);
     }
 
     public void Update()
@@ -53,7 +89,6 @@ public class IndicatorManager : MonoBehaviour
                 indicator.Value.visible = false;
                 continue;
             }
-            indicator.Value.visible = true;
 
             Vector2 playerPositionWorld = player.transform.position;
             Vector2 playerPosition = Camera.main.WorldToViewportPoint(playerPositionWorld);
@@ -90,6 +125,8 @@ public class IndicatorManager : MonoBehaviour
                 indicator.Value.style.bottom = 0;
                 indicator.Value.style.right = (width - indicatorWidth) * (projectedX + 0.5f);
             }
+
+            indicator.Value.visible = true;
         }
     }
 
@@ -98,6 +135,7 @@ public class IndicatorManager : MonoBehaviour
         var indicatorOuter = new VisualElement();
         indicatorOuter.AddToClassList(ClassIndicatorOuter);
         indicatorOuter.pickingMode = PickingMode.Ignore;
+        indicatorOuter.visible = false; // Make initially invisible until position is set.
 
         var indicatorInner = new VisualElement();
         indicatorInner.AddToClassList(ClassIndicatorInner);
@@ -109,5 +147,16 @@ public class IndicatorManager : MonoBehaviour
         indicatorUi.rootVisualElement.Add(indicatorOuter);
 
         indicators.Add(indicator, indicatorOuter);
+    }
+
+    public bool RemoveIndicator(Indicator indicator)
+    {
+        if (!indicators.ContainsKey(indicator)) { return false; }
+
+        var visualElement = indicators[indicator];
+        indicators.Remove(indicator);
+        indicatorUi.rootVisualElement.Remove(visualElement);
+
+        return true;
     }
 }

@@ -569,6 +569,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   indicatorUi: {fileID: 167442015}
+  scanRadius: 100
+  scanDuration: 10
 --- !u!1001 &5356421096789280763
 PrefabInstance:
   m_ObjectHideFlags: 0

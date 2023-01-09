@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 
+[RequireComponent(typeof(IndicatorInterface))]
 public class BuyScanCountDown : MonoBehaviour
 {
     [SerializeField]
@@ -13,6 +14,8 @@ public class BuyScanCountDown : MonoBehaviour
 
     public void Start()
     {
+        var indicatorInterface = GetComponent<IndicatorInterface>();
+
         var resourceManager = FindObjectOfType<ResourceManager>();
         var turretManager = FindObjectOfType<TurretManager>();
 
@@ -20,6 +23,9 @@ public class BuyScanCountDown : MonoBehaviour
 
         var buyButton = buyScanCountdown.rootVisualElement.Q<Button>("buy-button");
         buyButton.RegisterCallback<ClickEvent>(e => buyInterface.rootVisualElement.visible = !buyInterface.rootVisualElement.visible);
+
+        var scanButton = buyScanCountdown.rootVisualElement.Q<Button>("scan-button");
+        scanButton.RegisterCallback<ClickEvent>(e => indicatorInterface.Scan());
 
         var closeButton = buyInterface.rootVisualElement.Q<Button>("close-button");
         closeButton.RegisterCallback<ClickEvent>(e => buyInterface.rootVisualElement.visible = false);
