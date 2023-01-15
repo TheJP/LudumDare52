@@ -1,0 +1,45 @@
+.resource-icon {
+    width: 20px;
+    height: 20px;
+    -unity-background-scale-mode: stretch-to-fill;
+}
+
+.resource-label {
+    margin-left: 5px;
+}
+
+.colour-building-material {
+    color: rgba(0, 83, 255, 255);
+}
+
+.icon-building-material {
+    background-image: url('project://database/Assets/UI/ResourceDisplay/BuildingMaterial.png?fileID=21300000&guid=c7a92752e97e94e44bbbe6a48a99c5e5&type=3#BuildingMaterial');
+    -unity-background-image-tint-color: rgb(0, 83, 255);
+}
+
+.colour-fuel {
+    color: rgb(255, 190, 0);
+}
+
+.icon-fuel {
+    background-image: url('project://database/Assets/UI/ResourceDisplay/Fuel.png?fileID=21300000&guid=828311c5bb389a245ae9fd1a23562ed8&type=3#Fuel');
+    -unity-background-image-tint-color: rgb(255, 190, 0);
+}
+
+.colour-health {
+    color: rgb(0, 208, 0);
+}
+
+.icon-health {
+    background-image: url('project://database/Assets/UI/ResourceDisplay/Health.png?fileID=21300000&guid=737853a2a4cffe54bae098b39dc77882&type=3#Health');
+    -unity-background-image-tint-color: rgb(0, 208, 0);
+}
+
+.colour-research {
+    color: rgb(148, 0, 255);
+}
+
+.icon-research {
+    background-image: url('project://database/Assets/UI/ResourceDisplay/Research.png?fileID=21300000&guid=21694c3f1a5dac6418f69b761aadc5d8&type=3#Research');
+    -unity-background-image-tint-color: rgb(148, 0, 255);
+}

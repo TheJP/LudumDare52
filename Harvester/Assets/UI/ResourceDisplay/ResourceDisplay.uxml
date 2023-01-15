@@ -1,11 +1,12 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/UI/ResourceDisplay/ResourceDisplay.uss?fileID=7433441132597879392&amp;guid=9a0fb4be589371341ad3b5f86b42731b&amp;type=3#ResourceDisplay" />
+    <Style src="project://database/Assets/UI/Common.uss?fileID=7433441132597879392&amp;guid=6641dff7b662a1a4e949c2280eeefb98&amp;type=3#Common" />
     <ui:VisualElement picking-mode="Ignore" style="align-items: center;">
         <ui:VisualElement class="resource-box">
             <ui:VisualElement style="flex-direction: row;">
                 <ui:VisualElement class="resource">
-                    <ui:VisualElement name="building-material-icon" class="resource-icon" style="background-image: url(&apos;project://database/Assets/UI/ResourceDisplay/BuildingMaterial.png?fileID=21300000&amp;guid=c7a92752e97e94e44bbbe6a48a99c5e5&amp;type=3#BuildingMaterial&apos;); -unity-background-image-tint-color: rgb(0, 83, 255);" />
-                    <ui:Label text="100" display-tooltip-when-elided="true" name="building-material-label" class="resource-label" style="color: rgb(0, 83, 255);" />
+                    <ui:VisualElement name="building-material-icon" class="resource-icon icon-building-material" />
+                    <ui:Label text="100" display-tooltip-when-elided="true" name="building-material-label" class="resource-label colour-building-material" />
                 </ui:VisualElement>
                 <ui:VisualElement class="resource" style="display: none;">
                     <ui:VisualElement name="fuel-icon" class="resource-icon" style="background-image: url(&apos;project://database/Assets/UI/ResourceDisplay/Fuel.png?fileID=21300000&amp;guid=828311c5bb389a245ae9fd1a23562ed8&amp;type=3#Fuel&apos;); -unity-background-image-tint-color: rgb(255, 190, 0);" />
@@ -16,17 +17,17 @@
                     <ui:Label text="100" display-tooltip-when-elided="true" name="health-label" class="resource-label" style="color: rgb(0, 208, 0);" />
                 </ui:VisualElement>
                 <ui:VisualElement class="resource">
-                    <ui:VisualElement name="research-icon" class="resource-icon" style="background-image: url(&apos;project://database/Assets/UI/ResourceDisplay/Research.png?fileID=21300000&amp;guid=21694c3f1a5dac6418f69b761aadc5d8&amp;type=3#Research&apos;); -unity-background-image-tint-color: rgb(148, 0, 255);" />
-                    <ui:Label text="100" display-tooltip-when-elided="true" name="research-label" class="resource-label" style="color: rgb(148, 0, 255);" />
+                    <ui:VisualElement name="research-icon" class="resource-icon icon-research" />
+                    <ui:Label text="100" display-tooltip-when-elided="true" name="research-label" class="resource-label colour-research" />
                 </ui:VisualElement>
             </ui:VisualElement>
             <ui:VisualElement class="resources-bar-box">
                 <ui:VisualElement class="resource-bar">
-                    <ui:VisualElement name="health-icon" class="resource-bar-icon" style="background-image: url(&apos;project://database/Assets/UI/ResourceDisplay/Health.png?fileID=21300000&amp;guid=737853a2a4cffe54bae098b39dc77882&amp;type=3#Health&apos;); -unity-background-image-tint-color: rgb(0, 208, 0);" />
+                    <ui:VisualElement name="health-icon" class="resource-bar-icon icon-health" />
                     <ui:ProgressBar value="30.2" name="health-bar" class="resource-bar-value" />
                 </ui:VisualElement>
                 <ui:VisualElement class="resource-bar">
-                    <ui:VisualElement name="fuel-icon" class="resource-bar-icon" style="background-image: url(&apos;project://database/Assets/UI/ResourceDisplay/Fuel.png?fileID=21300000&amp;guid=828311c5bb389a245ae9fd1a23562ed8&amp;type=3#Fuel&apos;); -unity-background-image-tint-color: rgb(255, 190, 0);" />
+                    <ui:VisualElement name="fuel-icon" class="resource-bar-icon icon-fuel" />
                     <ui:ProgressBar value="30.2" name="fuel-bar" class="resource-bar-value resource-animation" />
                 </ui:VisualElement>
             </ui:VisualElement>

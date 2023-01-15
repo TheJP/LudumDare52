@@ -12,12 +12,15 @@
     transition-property: background-color;
     transition-duration: 0.5s;
     font-size: 20px;
-    color: rgb(238, 238, 238);
     align-items: center;
+    border-left-width: 0;
+    border-right-width: 0;
+    border-top-width: 0;
+    border-bottom-width: 0;
 }
 
 .turret-entry:hover {
-    background-color: rgb(40, 40, 40);
+    background-color: rgb(42, 42, 42);
 }
 
 .turret-entry-item {
@@ -35,6 +38,7 @@
     font-size: 12px;
     flex-wrap: wrap;
     margin-right: 5px;
+    -unity-text-align: upper-left;
 }
 
 .turret-description-image {
@@ -44,11 +48,15 @@
     -unity-background-scale-mode: scale-to-fit;
     transition-property: rotate;
     transition-duration: 0.5s;
-    -unity-background-image-tint-color: rgba(93, 187, 99, 255);
+    -unity-background-image-tint-color: rgb(93, 187, 99);
 }
 
 .turret-entry:hover .turret-description-image {
     rotate: 180deg;
+}
+
+.turret-required-resources {
+    margin-bottom: 0;
 }
 
 .buy-button {
@@ -69,17 +77,6 @@
 
 .buy-button:hover {
     background-color: rgb(51, 51, 51);
-}
-
-.resource-icon {
-    width: 20px;
-    height: 20px;
-    -unity-background-scale-mode: stretch-to-fill;
-}
-
-.resource-label {
-    color: rgb(238, 238, 238);
-    margin-left: 5px;
 }
 
 .resource-box {

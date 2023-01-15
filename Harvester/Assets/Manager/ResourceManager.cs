@@ -16,7 +16,6 @@ public class ResourceManagerEntry
     public int Value { get; set; }
 }
 
-[ExecuteInEditMode]
 public class ResourceManager : MonoBehaviour
 {
     [SerializeField]
@@ -92,8 +91,6 @@ public class ResourceManager : MonoBehaviour
                 bars[resource.Type].value = resource.Value;
             }
         }
-
-        if (!Application.isPlaying) { return; }
 
         foreach (var resource in resources)
         {
